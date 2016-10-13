@@ -1,17 +1,4 @@
 <?php
-/*
-//functions.php
-//function sum($x, $y) {
-//	return $x + $y;
-//}
-//echo sum (246352566, 1231651864);
-//echo "<br>";
-//echo sum(2,3)
-function hello($m, $b) {
-	return "Tere tulemst " .$m." ".$b. "!";
-}
-echo hello("Mattias", "Blehner")
-*/
 
 //see vail peab olema kõigil lehtedel, kus tahan kasutada session muutujat
 
@@ -31,7 +18,7 @@ function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $sig
 		$mysqli = new mysqli ($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		// mysqli rida
-		$stmt = $mysqli->prepare("INSERT INTO login (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO project_user (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
 		echo $mysqli->error;
 		// stringina üks täht iga muutuja kohta (?), mis t𼰠t
 		// string - s
@@ -64,7 +51,7 @@ function login($loginEmail, $loginPassword) {
 		
 		$stmt = $mysqli->prepare("
 		SELECT id, username, password, email, firstname, lastname, created
-		FROM login
+		FROM project_user
 		WHERE email = ?");
 		
 		echo $mysqli->error;
