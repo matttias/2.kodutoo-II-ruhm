@@ -33,7 +33,7 @@ function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $sig
 		// mysqli rida
 		$stmt = $mysqli->prepare("INSERT INTO login (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
 		echo $mysqli->error;
-		// stringina üks täht iga muutuja kohta (?), mis t��p t
+		// stringina üks täht iga muutuja kohta (?), mis t𼰠t
 		// string - s
 		// integer - i
 		// float (double) - d
@@ -53,9 +53,11 @@ function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $sig
 	}
 
 
-function login($email, $password) {
+function login($loginEmail, $loginPassword) {
 	
 	$error = "";
+	$password = $loginPassword;
+	$email = $loginEmail;
 	
 	$database = "if16_mattbleh_2";
 		$mysqli = new mysqli ($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
@@ -83,18 +85,23 @@ function login($email, $password) {
 			$hash = hash("sha512", $password);
 			if ($hash == $passwordFromDB) {
 				echo "Kasutaja logis sisse ".$id;
-			} else {
-				$error = "Vale parool";
-			}
-			//määran sessiooni muutujad
+				
 			$_SESSION["userId"] = $id;
 			$_SESSION["userEmail"] = $emailFromDB;
 			$_SESSION["userName"] = $usernameFromDB;
 			$_SESSION["firstName"] = $firstnameFromDB;
 			$_SESSION["lastName"] = $lastnameFromDB;
 			$_SESSION["created"] = $created;
+			header("Location: data.php");
+			exit();
 			
-			header("Location: login.php");
+			} else {
+				$error = "Vale parool";
+			}
+			//määran sessiooni muutujad
+			
+			
+			//header("Location: login.php");
 			
 		} else {
 			//ei ole sellist kasutajat selle meiliga

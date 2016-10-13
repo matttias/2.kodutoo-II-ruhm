@@ -23,6 +23,7 @@ $signupLastName = "";
 $signupLastNameError = "";
 
 $loginEmail2 = "";
+$loginEmail3 = "";
 $loginEmailError = "";
 $loginPasswordError = "";
 //kas on üldse olemas selline muutuja
@@ -90,6 +91,8 @@ if( isset( $_POST["signupGender"] ) ){
 	}		
 } 
 
+
+
 //peab olema email ja parool ja ühtegi errorit 
 
 if ( isset($_POST["signupEmail"]) && 
@@ -104,19 +107,26 @@ if ( isset($_POST["signupEmail"]) &&
 signUp($signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName);
 }
 $notice = "";
+if(isset($_POST["loginEmail"])){
+	//jah on olemas
+	//kas on tühi
+	if(!empty($_POST["loginEmail"])){
+		$_POST["loginEmail"] = cleanInput($_POST["loginEmail"]);
+		
 if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) && 
 	!empty($_POST["loginEmail"]) && !empty($_POST["loginPassword"]))
 	{
 //ei pea olema sama nimi mis function.php-s. Seal on $error
+	
 	$notice = login($_POST["loginEmail"], $_POST["loginPassword"]);
 	$loginEmail2 = $_POST["loginEmail"];
-	$loginEmail = cleanInput($_POST["loginEmail"]);
 	
 } else {
 	$loginEmailError = "Sisselogimiseks peab sisestama e-maili";
 	$loginPasswordError = "Sisselogimiseks peab sisetama parooli";
 }
-
+	}
+}
 
 ?>
 
