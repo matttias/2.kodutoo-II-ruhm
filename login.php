@@ -104,7 +104,7 @@ if ( isset($_POST["signupEmail"]) &&
 {
 	$password = hash("sha512", $_POST["signupPassword"]);
 	
-signUp($signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName);
+signUp($signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName, $signupGender);
 }
 $notice = "";
 if(isset($_POST["loginEmail"])){

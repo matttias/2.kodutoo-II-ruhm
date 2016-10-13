@@ -10,7 +10,7 @@ session_start();
 //************
 
 
-function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName) {
+function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName, $signupGender) {
 	//echo $serverUsername;
 	//Ühendus
 	$database = "if16_mattbleh_2";
@@ -18,14 +18,14 @@ function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $sig
 		$mysqli = new mysqli ($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		// mysqli rida
-		$stmt = $mysqli->prepare("INSERT INTO project_user (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO project_user (username, password, email, firstname, lastname, gender) VALUES (?, ?, ?, ?, ?, ?)");
 		echo $mysqli->error;
 		// stringina üks täht iga muutuja kohta (?), mis t𼰠t
 		// string - s
 		// integer - i
 		// float (double) - d
 		// küsimärgid asendada muutujaga
-		$stmt->bind_param("sssss",$signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName);
+		$stmt->bind_param("ssssss",$signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName, $signupGender);
 		
 		//täida käu
 		if($stmt->execute()) {
@@ -50,7 +50,7 @@ function login($loginEmail, $loginPassword) {
 		$mysqli = new mysqli ($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
 		$stmt = $mysqli->prepare("
-		SELECT id, username, password, email, firstname, lastname, created
+		SELECT id, username, password, email, firstname, lastname, gender, created
 		FROM project_user
 		WHERE email = ?");
 		
@@ -60,7 +60,7 @@ function login($loginEmail, $loginPassword) {
 		$stmt->bind_param("s", $email);
 		
 		//määrna väärtused muutujasse
-		$stmt->bind_result($id, $usernameFromDB, $passwordFromDB,  $emailFromDB, $firstnameFromDB, $lastnameFromDB, $created);
+		$stmt->bind_result($id, $usernameFromDB, $passwordFromDB,  $emailFromDB, $firstnameFromDB, $lastnameFromDB, $genderFromDB, $created);
 		$stmt->execute();
 		
 		//andmed tulid andmebaasist või mitte
@@ -78,6 +78,7 @@ function login($loginEmail, $loginPassword) {
 			$_SESSION["userName"] = $usernameFromDB;
 			$_SESSION["firstName"] = $firstnameFromDB;
 			$_SESSION["lastName"] = $lastnameFromDB;
+			$_SESSION["lastName"] = $genderFromDB;
 			$_SESSION["created"] = $created;
 			header("Location: data.php");
 			exit();
