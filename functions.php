@@ -78,7 +78,7 @@ function login($loginEmail, $loginPassword) {
 			$_SESSION["userName"] = $usernameFromDB;
 			$_SESSION["firstName"] = $firstnameFromDB;
 			$_SESSION["lastName"] = $lastnameFromDB;
-			$_SESSION["lastName"] = $genderFromDB;
+			$_SESSION["gender"] = $genderFromDB;
 			$_SESSION["created"] = $created;
 			header("Location: data.php");
 			exit();
