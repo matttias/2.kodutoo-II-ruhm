@@ -158,24 +158,24 @@ if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) &&
 		<input name="signupFirstName" placeholder="Eesnimi" type="text" value="<?=$signupFirstName;?>"> <?php echo $signupFirstNameError; ?> <br><br>
 		<input name="signupLastName" placeholder="Perekonnanimi" type="text" value="<?=$signupLastName;?>"> <?php echo $signupLastNameError; ?> <br><br>
 		
-		<?php if($signupGender == "mees") { ?>
-			<input name="signupGender" value="mees" type="radio" checked> Mees <br>
+		<?php if($signupGender == "male") { ?>
+			<input name="signupGender" value="male" type="radio" checked> Mees <br>
 		<?php }else { ?> <!--Tühikud peavad olema-->
-			<input name="signupGender" value="mees" type="radio"> Mees <br>
+			<input name="signupGender" value="male" type="radio"> Mees <br>
 		<?php } ?>	
 		
 		
-		<?php if($signupGender == "naine") { ?>
-			<input name="signupGender" value="naine" type="radio" checked> Naine <br>
+		<?php if($signupGender == "famale") { ?>
+			<input name="signupGender" value="famale" type="radio" checked> Naine <br>
 		<?php }else { ?> <!--Tühikud peavad olema-->
-			<input name="signupGender" value="naine" type="radio"> Naine <br>
+			<input name="signupGender" value="famale" type="radio"> Naine <br>
 		<?php } ?>
 		
 		
-		<?php if($signupGender == "muu") { ?>
-			<input name="signupGender" value="muu" type="radio" checked> Ei soovi avaldada <br><br>
+		<?php if($signupGender == "other") { ?>
+			<input name="signupGender" value="other" type="radio" checked> Ei soovi avaldada <br><br>
 		<?php }else { ?> <!--Tühikud peavad olema-->
-			<input name="signupGender" value="muu" type="radio"> Ei soovi avaldada <br><br>
+			<input name="signupGender" value="other" type="radio"> Ei soovi avaldada <br><br>
 		<?php } ?>
 			
 			

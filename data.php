@@ -172,10 +172,10 @@ $runData = getRun();
 	$html .="<tr>";
 		$html .= "<th>username</th>";
 		$html .= "<th>o_course</th>";
-		$html .= "<th>distance</th>";
-		$html .= "<th>duration</th>";
-		$html .= "<th>maxspeed</th>";
-		$html .= "<th>avgspeed</th>";
+		$html .= "<th>distance(km)</th>";
+		$html .= "<th>duration(hour:min)</th>";
+		$html .= "<th>maxspeed(km/h)</th>";
+		$html .= "<th>avgspeed(min/km)</th>";
 		$html .= "<th>date</th>";
 	$html .="</tr>";
 	
