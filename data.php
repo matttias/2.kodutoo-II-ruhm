@@ -128,16 +128,16 @@ $runData = getRun();
 		
 		
 		<?php if($o_course == "4") { ?>
-			<input name="o_course" value="3" type="radio" checked> 4 <br>
+			<input name="o_course" value="4" type="radio" checked> 4 <br>
 		<?php }else { ?> <!--Tühikud peavad olema-->
-			<input name="o_course" value="3" type="radio"> 4 <br>
+			<input name="o_course" value="4" type="radio"> 4 <br>
 		<?php } ?>
 		
 		
 		<?php if($o_course == "5") { ?>
-			<input name="o_course" value="3" type="radio" checked> 5 <br>
+			<input name="o_course" value="5" type="radio" checked> 5 <br>
 		<?php }else { ?> <!--Tühikud peavad olema-->
-			<input name="o_course" value="3" type="radio"> 5 <br>
+			<input name="o_course" value="5" type="radio"> 5 <br>
 		<?php } ?>
 		
 		<?=$distanceError; ?> <br>
