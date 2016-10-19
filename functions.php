@@ -116,7 +116,71 @@ function cleanInput($input) {
 }
 
 	
+function run($userName, $o_course, $distance, $duration, $maxSpeed, $avgSpeed){
+	//echo $serverUsername;
+	//Ühendus
+	$database = "if16_mattbleh_2";
+
+		$mysqli = new mysqli ($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
+
+		// mysqli rida
+		$stmt = $mysqli->prepare("INSERT INTO project_run (name, course, distance, duration, max_speed, avg_pace, date) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)");
+		echo $mysqli->error;
+		// stringina üks täht iga muutuja kohta (?), mis t𼰠t
+		// string - s
+		// integer - i
+		// float (double) - d
+		// küsimärgid asendada muutujaga
+		$stmt->bind_param("sidddd",$userName, $o_course, $distance, $duration, $maxSpeed, $avgSpeed);
+		
+		//täida käu
+		if($stmt->execute()) {
+			echo "Salvestamine õnnestus";
+			
+		} else {
+		 	echo "ERROR ".$stmt->error;
+		}
+		//panen Ühenduse kinni
+		$stmt->close();
+		$mysqli->close();
+	}
 	
 	
+function getRun(){
+	
+	$database = "if16_mattbleh_2";
+	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
+	
+	$stmt = $mysqli->prepare ("SELECT id, name, course, distance, duration, max_speed, avg_pace, date FROM project_run");
+	
+	$stmt->bind_result($id, $userName, $o_course, $distance, $duration, $maxSpeed, $avgSpeed, $date);
+	$stmt->execute();
+	
+	//tekitan massiivi
+	$result = array();	
+	
+	
+	//tee seda seni, kuni on rida andmeid, mis vastab select lausele
+	while($stmt->fetch()) {
+	//tekitan objekti
+		$run = new StdClass();
+		
+		$run->userName = $userName;
+		$run->o_course = $o_course;
+		$run->distance = $distance;
+		$run->duration = $duration;
+		$run->maxSpeed = $maxSpeed;
+		$run->avgSpeed = $avgSpeed;
+		$run->date = $date;
+		
+		
+		#echo $plate."<br>";
+		//iga korda massiivi lisan juurde numbrimärgi
+		array_push($result, $run);
+	}
+$stmt->close();
+$mysqli->close();	
+return $result;
+}
 	
 ?>
