@@ -1,7 +1,7 @@
 <?php
 
 require("../../config.php");
-
+require("functions.php");
 
 $o_course = ""; //<---orienteerumis raja number
 $distance = "";
@@ -14,8 +14,6 @@ $durationError = "";
 $maxSpeedError = "";
 $avgSpeedError = "";
 
-
-require("functions.php");
 //kui ei ole kasutaja id'd
 if (!isset($_SESSION["userId"])){
 	//suunan sisselogimise lehele
@@ -37,7 +35,7 @@ if(isset($_POST["distance"])){
 	if(empty($_POST["distance"])){
 		$distanceError = "See väli on kohustuslik";	
 	} else {
-		//email on olemas
+		$_POST["distance"] = cleanInput($_POST["distance"]);
 		$distance = $_POST["distance"];
 	}
 }
@@ -48,7 +46,7 @@ if(isset($_POST["duration"])){
 	if(empty($_POST["duration"])){
 		$durationError = "See väli on kohustuslik";	
 	} else {
-		//email on olemas
+		$_POST["duration"] = cleanInput($_POST["duration"]);
 		$duration = $_POST["duration"];
 	}
 }
@@ -59,7 +57,7 @@ if(isset($_POST["maxSpeed"])){
 	if(empty($_POST["maxSpeed"])){
 		$maxSpeedError = "See väli on kohustuslik";	
 	} else {
-		//email on olemas
+	$_POST["maxSpeed"] = cleanInput($_POST["maxSpeed"]);
 		$maxSpeed = $_POST["maxSpeed"];
 	}
 }
@@ -70,7 +68,7 @@ if(isset($_POST["avgSpeed"])){
 	if(empty($_POST["avgSpeed"])){
 		$avgSpeedError = "See väli on kohustuslik";	
 	} else {
-		//email on olemas
+	$_POST["avgSpeed"] = cleanInput($_POST["avgSpeed"]);
 		$avgSpeed = $_POST["avgSpeed"];
 	}
 }
@@ -142,29 +140,25 @@ $runData = getRun();
 		
 		<?=$distanceError; ?> <br>
 
-<h3>Raja pikkus?</h3>
+<h3>Raja pikkus? (km)</h3>
 
-	<input name="distance" placeholder="Pikkus" type="text"> <?=$distanceError; ?> <br><br>
+	<input name="distance" placeholder="Pikkus" type="text" value="<?=$distance;?>"> <?=$distanceError; ?> <br><br>
 	
-<h3>Läbimise kestvus?</h3>
+<h3>Läbimise kestvus? (hour.min)</h3>
 	
-	<input name="duration" placeholder="Kestvus" type="text"> <?=$durationError; ?> <br><br>
+	<input name="duration" placeholder="Kestvus" type="text" value="<?=$duration;?>" > <?=$durationError; ?> <br><br>
 
-<h3>Läbimise suurim kiirus?</h3>
+<h3>Läbimise suurim kiirus? (km/h)</h3>
 	
-	<input name="maxSpeed" placeholder="Max kiirus" type="text"> <?=$maxSpeedError; ?> <br><br>
+	<input name="maxSpeed" placeholder="Max kiirus" type="text" value="<?=$maxSpeed;?>" > <?=$maxSpeedError; ?> <br><br>
 
-<h3>Läbimise keskmine kiirus?</h3>
+<h3>Läbimise keskmine kiirus? (min/km)</h3>
 
-	<input name="avgSpeed" placeholder="Avg kiirus" type="text"> <?=$avgSpeedError; ?> <br><br>
+	<input name="avgSpeed" placeholder="Avg kiirus" type="text" value="<?=$avgSpeed;?>" > <?=$avgSpeedError; ?> <br><br>
 
 <input type="submit" value="Sisesta">
 
-
-
 </form>
-
-
 
 <?php
 	
@@ -173,22 +167,22 @@ $runData = getRun();
 		$html .= "<th>username</th>";
 		$html .= "<th>o_course</th>";
 		$html .= "<th>distance(km)</th>";
-		$html .= "<th>duration(hour:min)</th>";
+		$html .= "<th>duration(hour.min)</th>";
 		$html .= "<th>maxspeed(km/h)</th>";
 		$html .= "<th>avgspeed(min/km)</th>";
 		$html .= "<th>date</th>";
 	$html .="</tr>";
 	
-	foreach($runData as $c) {
+	foreach($runData as $m) {
 	
 	$html .="<tr>";
-		$html .= "<td>".$c->userName."</td>";
-		$html .= "<td>".$c->o_course."</td>";
-		$html .= "<td>".$c->distance."</td>";
-		$html .= "<td>".$c->duration."</td>";
-		$html .= "<td>".$c->maxSpeed."</td>";
-		$html .= "<td>".$c->avgSpeed."</td>";
-		$html .= "<td>".$c->date."</td>";
+		$html .= "<td>".$m->userName."</td>";
+		$html .= "<td>".$m->o_course."</td>";
+		$html .= "<td>".$m->distance."</td>";
+		$html .= "<td>".$m->duration."</td>";
+		$html .= "<td>".$m->maxSpeed."</td>";
+		$html .= "<td>".$m->avgSpeed."</td>";
+		$html .= "<td>".$m->date."</td>";
 	$html .="</tr>";
 	
 	}

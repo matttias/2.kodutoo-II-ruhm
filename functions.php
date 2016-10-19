@@ -109,7 +109,7 @@ function cleanInput($input) {
 	// "tere tulemast"
 
 	// "<"
-	$input = htmlspecialchars($input);
+	$input = htmlspecialchars_decode($input);
 	// "&lt"
 	
 	return $input;

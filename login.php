@@ -34,6 +34,7 @@ if(isset($_POST["signupEmail"])){
 		$signupEmailError = "See väli on kohustuslik";	
 	} else {
 		//email on olemas
+		$_POST["signupEmail"] = cleanInput($_POST["signupEmail"]);
 		$signupEmail = $_POST["signupEmail"];
 	}
 }
@@ -41,6 +42,7 @@ if(isset($_POST["signupUsername"])) {
 	if(empty($_POST["signupUsername"])){
 		$signupUsernameError = "Igal kasutajal peab olema kasutajanimi";
 	} else {
+		$_POST["signupUsername"] = cleanInput($_POST["signupUsername"]);
 		$signupUsername = $_POST["signupUsername"];
 		}
 }
@@ -75,6 +77,7 @@ if(isset($_POST["signupFirstName"])) {
 	if(empty($_POST["signupFirstName"])){
 		$signupFirstNameError = "Eesnimi sisestamine on kohustuslik";
 	} else {
+		$_POST["signupFirstName"] = cleanInput($_POST["signupFirstName"]);
 		$signupFirstName = $_POST["signupFirstName"];
 	}
 }
@@ -82,6 +85,7 @@ if(isset($_POST["signupLastName"])) {
 	if(empty($_POST["signupLastName"])){
 		$signupLastNameError = "Perekonnanimi sisestamine on kohustuslik";
 	} else {
+		$_POST["signupLastName"] = cleanInput($_POST["signupLastName"]);
 		$signupLastName = $_POST["signupLastName"];
 	}
 }
@@ -141,7 +145,7 @@ if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) &&
 	<h1>Logi sisse</h1>
 	<form method="POST">
 		<p style="color:red;"><?=$notice;?></p>
-		<label>E-mail</label> <br>
+		<label>E-post</label> <br>
 		<input name="loginEmail" type="text" value="<?=$loginEmail2;?>"> <?php echo $loginEmailError; ?> <br><br>
 		<input name="loginPassword" placeholder="Parool" type="password"> <?php echo $loginPasswordError; ?> <br><br>
 		<input type="submit" value="Logi sisse">
