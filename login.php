@@ -169,10 +169,10 @@ if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) &&
 		<?php } ?>	
 		
 		
-		<?php if($signupGender == "famale") { ?>
-			<input name="signupGender" value="famale" type="radio" checked> Naine <br>
+		<?php if($signupGender == "female") { ?>
+			<input name="signupGender" value="female" type="radio" checked> Naine <br>
 		<?php }else { ?> <!--Tühikud peavad olema-->
-			<input name="signupGender" value="famale" type="radio"> Naine <br>
+			<input name="signupGender" value="female" type="radio"> Naine <br>
 		<?php } ?>
 		
 		
