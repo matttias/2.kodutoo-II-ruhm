@@ -28,10 +28,15 @@ if (isset($_GET["logout"])) {
 	exit();
 }
 
+if(!isset($_POST["o_course"])){
+	//if(empty( $_POST["o_course"] ) ){
+		$o_courseError = "See väli on kohustuslik";
+	}else{
+		$o_course = $_POST["o_course"];
+		//}
+} 
 
 if(isset($_POST["distance"])){
-	//jah on olemas
-	//kas on tühi
 	if(empty($_POST["distance"])){
 		$distanceError = "See väli on kohustuslik";	
 	} else {
@@ -41,8 +46,6 @@ if(isset($_POST["distance"])){
 }
 
 if(isset($_POST["duration"])){
-	//jah on olemas
-	//kas on tühi
 	if(empty($_POST["duration"])){
 		$durationError = "See väli on kohustuslik";	
 	} else {
@@ -52,36 +55,25 @@ if(isset($_POST["duration"])){
 }
 
 if(isset($_POST["maxSpeed"])){
-	//jah on olemas
-	//kas on tühi
 	if(empty($_POST["maxSpeed"])){
 		$maxSpeedError = "See väli on kohustuslik";	
 	} else {
-	$_POST["maxSpeed"] = cleanInput($_POST["maxSpeed"]);
+		$_POST["maxSpeed"] = cleanInput($_POST["maxSpeed"]);
 		$maxSpeed = $_POST["maxSpeed"];
 	}
 }
 
 if(isset($_POST["avgSpeed"])){
-	//jah on olemas
-	//kas on tühi
 	if(empty($_POST["avgSpeed"])){
 		$avgSpeedError = "See väli on kohustuslik";	
 	} else {
-	$_POST["avgSpeed"] = cleanInput($_POST["avgSpeed"]);
+		$_POST["avgSpeed"] = cleanInput($_POST["avgSpeed"]);
 		$avgSpeed = $_POST["avgSpeed"];
 	}
 }
 
-if( isset( $_POST["o_course"] ) ){
-	if(empty( $_POST["o_course"] ) ){
-		$o_courseError = "See väli on kohustuslik";
-	}else{
-		$o_course = $_POST["o_course"];
-		}
-} 
 if (isset($_POST["o_course"]) && isset($_POST["distance"]) && isset($_POST["duration"]) && isset($_POST["maxSpeed"])&& isset($_POST["avgSpeed"]) &&
-	!empty($_POST["o_course"]) && !empty($_POST["distance"]) && !empty($_POST["duration"]) && !empty($_POST["maxSpeed"]) && !empty($_POST["avgSpeed"]))
+!empty($_POST["o_course"]) && !empty($_POST["distance"]) && !empty($_POST["duration"]) && !empty($_POST["maxSpeed"]) && !empty($_POST["avgSpeed"]))
 	{
 		run($_SESSION["userName"], $o_course, $distance, $duration, $maxSpeed, $avgSpeed);
 	}
@@ -102,7 +94,7 @@ $runData = getRun();
 	<h1>Sisesta enda jooksu andmed:</h1>
 
 <h3>Rada number</h3>
-<form method="POST"> <br>
+<form method="POST">
 
 		<?php if($o_course == "1") { ?>
 			<input name="o_course" value="1" type="radio" checked> 1 <br>
@@ -113,32 +105,32 @@ $runData = getRun();
 		
 		<?php if($o_course == "2") { ?>
 			<input name="o_course" value="2" type="radio" checked> 2 <br>
-		<?php }else { ?> <!--Tühikud peavad olema-->
+		<?php }else { ?>
 			<input name="o_course" value="2" type="radio"> 2 <br>
 		<?php } ?>
 		
 		
 		<?php if($o_course == "3") { ?>
 			<input name="o_course" value="3" type="radio" checked> 3 <br>
-		<?php }else { ?> <!--Tühikud peavad olema-->
+		<?php }else { ?> 
 			<input name="o_course" value="3" type="radio"> 3 <br>
 		<?php } ?>
 		
 		
 		<?php if($o_course == "4") { ?>
 			<input name="o_course" value="4" type="radio" checked> 4 <br>
-		<?php }else { ?> <!--Tühikud peavad olema-->
+		<?php }else { ?> 
 			<input name="o_course" value="4" type="radio"> 4 <br>
 		<?php } ?>
 		
 		
 		<?php if($o_course == "5") { ?>
 			<input name="o_course" value="5" type="radio" checked> 5 <br>
-		<?php }else { ?> <!--Tühikud peavad olema-->
+		<?php }else { ?> 
 			<input name="o_course" value="5" type="radio"> 5 <br>
 		<?php } ?>
 		
-		<?=$distanceError; ?> <br>
+		<?=$o_courseError; ?> <br>
 
 <h3>Raja pikkus? (km)</h3>
 
