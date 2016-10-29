@@ -88,7 +88,6 @@ $runData = getRun();
 <p>Kasutajanimi: <a href="user.php"><?=$_SESSION["userName"];?></a></p>
 <p>E-mail: <?=$_SESSION["userEmail"];?></p>
 <p>Sugu: <?=$_SESSION["gender"];?></p>
-<p>Loodud: <?=$_SESSION["created"];?></p>
 <a href="?logout=1">Logi välja</a>  <br> <br>
 
 	<h1>Sisesta enda jooksu andmed:</h1>

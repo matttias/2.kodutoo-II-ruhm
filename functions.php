@@ -50,7 +50,7 @@ function login($loginEmail, $loginPassword) {
 		$mysqli = new mysqli ($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
 		$stmt = $mysqli->prepare("
-		SELECT id, username, password, email, firstname, lastname, gender, created
+		SELECT id, username, password, email, firstname, lastname, gender
 		FROM project_user
 		WHERE email = ?");
 		
@@ -60,7 +60,7 @@ function login($loginEmail, $loginPassword) {
 		$stmt->bind_param("s", $email);
 		
 		//määrna väärtused muutujasse
-		$stmt->bind_result($id, $usernameFromDB, $passwordFromDB,  $emailFromDB, $firstnameFromDB, $lastnameFromDB, $genderFromDB, $created);
+		$stmt->bind_result($id, $usernameFromDB, $passwordFromDB,  $emailFromDB, $firstnameFromDB, $lastnameFromDB, $genderFromDB);
 		$stmt->execute();
 		
 		//andmed tulid andmebaasist või mitte
@@ -79,7 +79,6 @@ function login($loginEmail, $loginPassword) {
 			$_SESSION["firstName"] = $firstnameFromDB;
 			$_SESSION["lastName"] = $lastnameFromDB;
 			$_SESSION["gender"] = $genderFromDB;
-			$_SESSION["created"] = $created;
 			header("Location: data.php");
 			exit();
 			
